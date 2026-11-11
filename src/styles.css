@@ -1,0 +1,142 @@
+@import "tailwindcss";
+
+/* Casa Brasa — layout: dark carbon bands with one brass accent; bone (hueso) light bands for rhythm.
+   Palette: carbón #0B0B0C · carbón-2 #141315 · latón #C8924A · latón claro #E2B97A · hueso #EDE6DA · humo #9A9286
+   Type: Archivo (wide, heavy) for display, Instrument Serif italic for accents, Archivo normal width for body. */
+
+@theme inline {
+  --color-carbon: #0b0b0c;
+  --color-carbon-2: #141315;
+  --color-carbon-3: #1d1b1d;
+  --color-laton: #c8924a;
+  --color-laton-claro: #e2b97a;
+  --color-hueso: #ede6da;
+  --color-humo: #9a9286;
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+
+  --font-sans: "Archivo", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: "Archivo", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Instrument Serif", ui-serif, Georgia, "Times New Roman", serif;
+}
+
+:root {
+  color-scheme: dark;
+  --background: #0b0b0c;
+  --foreground: #ede6da;
+  --card: #141315;
+  --muted: #1d1b1d;
+  --muted-foreground: #a8a094;
+  --border: rgba(237, 230, 218, 0.12);
+  --primary: #c8924a;
+  --primary-foreground: #0b0b0c;
+  --secondary: #e2b97a;
+  --secondary-foreground: #ede6da;
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Bone band: same tokens, light values. */
+.band-hueso {
+  color-scheme: light;
+  --background: #ede6da;
+  --foreground: #141315;
+  --card: #f6f1e8;
+  --muted: #e2d9ca;
+  --muted-foreground: #5d564c;
+  --border: rgba(20, 19, 21, 0.14);
+  --primary: #8a5a1f;
+  --primary-foreground: #f6f1e8;
+  background: var(--background);
+  color: var(--foreground);
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+}
+body {
+  margin: 0;
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0 0 auto;
+  height: env(safe-area-inset-top, 0px);
+  z-index: 60;
+  background: #0b0b0c;
+}
+::selection {
+  background: #c8924a;
+  color: #0b0b0c;
+}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+@utility gutter {
+  padding-left: max(20px, env(safe-area-inset-left, 0px));
+  padding-right: max(20px, env(safe-area-inset-right, 0px));
+}
+@utility font-wide {
+  font-family: var(--font-display);
+  font-stretch: 118%;
+  font-variation-settings: "wdth" 118;
+}
+@utility eyebrow {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+h1,
+h2,
+h3 {
+  text-wrap: balance;
+}
+
+/* Marquee */
+@keyframes cb-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.cb-marquee {
+  animation: cb-marquee 38s linear infinite;
+}
+.cb-marquee-wrap:hover .cb-marquee {
+  animation-play-state: paused;
+}
+@media (prefers-reduced-motion: reduce) {
+  .cb-marquee {
+    animation: none;
+  }
+}
+
+/* Brass hairline used on dividers and frames */
+.brass-line {
+  background: linear-gradient(90deg, transparent, #c8924a 30%, #e2b97a 50%, #c8924a 70%, transparent);
+}
+.text-brass {
+  color: #e2b97a;
+}
